@@ -36,7 +36,7 @@ public class InMemoryMeetingRoomsRepository implements MeetingRoomsRepository{
     public List<MeetingRoom> getRoomPerNamePart(String namePart) {
         return meetingRooms.stream()
                 .filter(meetingRoom -> meetingRoom.getName().toLowerCase()
-                .contains(namePart.toLowerCase()))
+                        .contains(namePart.toLowerCase()))
                 .collect(Collectors.toList());
     }
 }

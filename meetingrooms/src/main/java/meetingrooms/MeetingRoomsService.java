@@ -72,10 +72,10 @@ public class MeetingRoomsService {
     }
 
 
-        public List<MeetingRoom> getRoomPerName(String name){
-            List<MeetingRoom> meetingRooms = meetingRoomsRepository.getRoomPerName(name);
-            System.out.println(meetingRooms);
-            return  meetingRooms;
+    public List<MeetingRoom> getRoomPerName(String name){
+        List<MeetingRoom> meetingRooms = meetingRoomsRepository.getRoomPerName(name);
+        System.out.println(meetingRooms);
+        return  meetingRooms;
     }
 
     public List<MeetingRoom> getRoomPerNamePart (String namePart) {
@@ -85,12 +85,12 @@ public class MeetingRoomsService {
     }
 
 
-        public List<MeetingRoom> getRoomPerArea(int area) {
-            List<MeetingRoom> meetingRooms = meetingRoomsRepository.getMeetingRoomsList().stream()
-                    .filter(meetingRoom -> meetingRoom.getArea() == area)
-                    .collect(Collectors.toList());
-            System.out.println(meetingRooms);
-            return  meetingRooms;
+    public List<MeetingRoom> getRoomPerArea(int area) {
+        List<MeetingRoom> meetingRooms = meetingRoomsRepository.getMeetingRoomsList().stream()
+                .filter(meetingRoom -> meetingRoom.getArea() == area)
+                .collect(Collectors.toList());
+        System.out.println(meetingRooms);
+        return  meetingRooms;
 
     }
 

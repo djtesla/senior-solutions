@@ -13,8 +13,7 @@ public interface MeetingRoomsRepository {
     List<MeetingRoom> getRoomPerName(String name);
 
 
-    List<MeetingRoom> getRoomPerNamePart (String namePart);
-
+    List<MeetingRoom> getRoomPerNamePart(String namePart);
 
 
 }
