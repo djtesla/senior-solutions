@@ -5,23 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="48c15af7-f9e4-454d-85ec-e0929241c003" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/meetingrooms.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/meetingrooms/InMemoryMeetingRoomsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/meetingrooms/MariadbMeetingRoomsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/meetingrooms/MeetingRoom.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/meetingrooms/MeetingRoomsController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/meetingrooms/MeetingRoomsRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/meetingrooms/MeetingRoomsService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../proba" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../streams-demo-public" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../streams-demo-public" beforeDir="false" afterPath="$PROJECT_DIR$/../streams-demo-public" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +35,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SONARLINT_PRECOMMIT_ANALYSIS" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
