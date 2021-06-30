@@ -16,7 +16,12 @@ public class HelloController {
 
 
 
-    public HelloController(HelloService helloService) {
+/*    public HelloController(HelloService helloService) {
+        this.helloService = helloService;
+    }*/
+
+    @Autowired
+    public void setHelloService(HelloService helloService) {
         this.helloService = helloService;
     }
 
