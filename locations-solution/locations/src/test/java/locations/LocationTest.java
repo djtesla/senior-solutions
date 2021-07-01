@@ -3,9 +3,7 @@ package locations;
 import org.assertj.core.api.Assertions;
 import org.assertj.core.api.SoftAssertions;
 import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.*;
@@ -17,7 +15,7 @@ class LocationTest {
     LocationParser locationParser;
 
     @BeforeEach
-    void init () {
+    void init() {
         locationParser = new LocationParser();
     }
 
@@ -54,7 +52,7 @@ Null Island,0,0
 
     @Test
     void testParseThrowsException() {
-        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, ()-> locationParser.parse("Bremen,53x5.5,8.49"));
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class, () -> locationParser.parse("Bremen,53x5.5,8.49"));
         assertEquals("Invalid coordinate", iae.getMessage());
     }
 
@@ -84,5 +82,42 @@ Null Island,0,0
         softly.assertThat(location.getLat()).isEqualTo(40.50);
         softly.assertThat(location.getLon()).isEqualTo(14.15);
 
+    }
+
+    @Test
+    void testDistanceFrom() {
+
+    }
+
+
+    @Test
+    void testConstructorThrowsException() {
+        assertAll(
+                () -> assertThrows(IllegalArgumentException.class, () -> new Location("Dream Island", 91, 100)),
+                () -> assertThrows(IllegalArgumentException.class, () -> new Location("Dream Island", -91, 100)),
+                () -> assertThrows(IllegalArgumentException.class, () -> new Location("Dream Island", 80, 185)),
+                () -> assertThrows(IllegalArgumentException.class, () -> new Location("Dream Island", 80, -200))
+        );
+    }
+
+    @Test
+    void testConstructorThrowsExceptionWithMessage() {
+        IllegalArgumentException iae = assertThrows(IllegalArgumentException.class,
+                () -> new Location("Dream Island", 91, 100));
+
+        assertEquals("Wrong parameter: latitude must be between -90 and 90, longitude must be between -180 and 180", iae.getMessage());
+
+    }
+
+
+    @RepeatedTest(value = 3, name = "Is on Equator repeated  test {currentRepetition}/{totalRepetitions}")
+    @Test
+    void isOnEquatorRepeatedTest(RepetitionInfo repetitionInfo) {
+        Object[][] locations = {{"Dream Island", 14.40, 0.0, true}, {"Naples", 40.50, 14.15, false}, {"Greenwich", 51.48, 40.0, false}};
+        Location location = new Location((String) (locations[repetitionInfo.getCurrentRepetition() - 1][0]),
+                (double) (locations[repetitionInfo.getCurrentRepetition() - 1][1]),
+                (double) (locations[repetitionInfo.getCurrentRepetition() - 1][2]));
+        System.out.println(location);
+        assertEquals(locations[repetitionInfo.getCurrentRepetition() - 1][3],location.isOnEquator());
     }
 }

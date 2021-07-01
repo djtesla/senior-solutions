@@ -9,9 +9,21 @@ public class Location {
     private double lon;
 
     public Location(String name, double lat, double lon) {
+
+        if (isNotValidLat(lat) || isNotValidLon(lon)) {
+            throw new IllegalArgumentException("Wrong parameter: latitude must be between -90 and 90, longitude must be between -180 and 180");
+        }
         this.name = name;
         this.lat = lat;
         this.lon = lon;
+    }
+
+    private boolean isNotValidLon(double lon) {
+        return lon > 180 || lon < -180;
+    }
+
+    private boolean isNotValidLat(double lat) {
+        return lat > 90 || lat < -90;
     }
 
     public String getName() {
@@ -39,14 +51,14 @@ public class Location {
     }
 
     public boolean isOnEquator(){
-        return lat == 0;
-    }
-
-    public boolean isOnPrimeMeridian(){
         return lon == 0;
     }
 
-    public double distance(Location another) {
+    public boolean isOnPrimeMeridian(){
+        return lat == 0;
+    }
+
+    public double distanceFrom(Location another) {
 
         double lat1 = lat;
         double lat2 =another.getLat();
@@ -80,6 +92,15 @@ public class Location {
     @Override
     public int hashCode() {
         return Objects.hash(name, lat, lon);
+    }
+
+    @Override
+    public String toString() {
+        return "Location{" +
+                "name='" + name + '\'' +
+                ", lat=" + lat +
+                ", lon=" + lon +
+                '}';
     }
 }
 
