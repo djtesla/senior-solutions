@@ -1,5 +1,10 @@
-
+###
 GET http://localhost:8080/api/employees
+Accept: applicaiton/json
+
+
+###
+GET http://localhost:8080/api/employees/11
 Accept: applicaiton/json
 
 
@@ -13,7 +18,7 @@ Content-Type: application/json
 
 
 ###
-PUT http://localhost:8080/api/employees/1
+PUT http://localhost:8080/api/employees/4
 Accept: applicaiton/json
 Content-Type: application/json
 
@@ -22,8 +27,8 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8080/api/employees/2
-Accept: applicaiton/json
+DELETE http://localhost:8080/api/employees/1
+
 
 
 

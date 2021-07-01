@@ -26,8 +26,10 @@ public class EmployeesService {
     public EmployeesService(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
+
     public List<EmployeeDto> listEmployees(Optional<String> prefix) {
-        Type targetListType = new TypeToken<List<EmployeeDto>>() {}.getType();
+        Type targetListType = new TypeToken<List<EmployeeDto>>() {
+        }.getType();
         List<Employee> employeesFiltered = employees.stream().filter(e -> prefix.isEmpty() || e.getName().toLowerCase().startsWith(prefix.get().toLowerCase()))
                 .collect(Collectors.toList());
         return modelMapper.map(employeesFiltered, targetListType);
@@ -35,30 +37,37 @@ public class EmployeesService {
 
 
     public EmployeeDto listEmployeesById(long id) {
-        Employee employee = employees.stream().filter(e->e.getId()== id)
-                .findAny().orElseThrow(() -> new IllegalStateException("Employee not found: " + id ));
-        return modelMapper.map(employee,EmployeeDto.class);
+        Employee employee = employees.stream().filter(e -> e.getId() == id)
+                .findAny().orElseThrow(() -> new IllegalArgumentException("Employee not found: " + id));
+        return modelMapper.map(employee, EmployeeDto.class);
     }
 
     public EmployeeDto createEmployee(CreateEmployeeCommand command) {
-        Employee employee = new Employee(idGenerator.incrementAndGet(),command.getName());
+        Employee employee = new Employee(idGenerator.incrementAndGet(), command.getName());
         employees.add(employee);
         return modelMapper.map(employee, EmployeeDto.class);
     }
 
     public EmployeeDto updateEmployee(UpdateEmployeeCommand command, long id) {
         Employee employee = employees.stream()
-                .filter(e->e.getId()==id).findAny().orElseThrow(
-                ()->new IllegalArgumentException ("Cannot find employee wit id " +id));
+                .filter(e -> e.getId() == id).findAny().orElseThrow(
+                        () -> new IllegalArgumentException("Cannot find employee wit id " + id));
         employee.setName(command.getName());
         return modelMapper.map(employee, EmployeeDto.class);
     }
 
     public void deleteEmployee(long id) {
         Employee employee = employees.stream()
-                .filter(e->e.getId()==id).findAny().orElseThrow(
-                        ()->new IllegalArgumentException ("Cannot find employee wit id " +id));
+                .filter(e -> e.getId() == id).findAny().orElseThrow(
+                        () -> new IllegalArgumentException("Cannot find employee wit id " + id));
         employees.remove(employee);
-
     }
+
+
+    public void deleteAllEmployees() {
+        idGenerator = new AtomicLong();
+        employees.clear();
+    }
+
 }
+
