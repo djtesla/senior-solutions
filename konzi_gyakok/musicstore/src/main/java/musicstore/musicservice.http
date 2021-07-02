@@ -1,0 +1,30 @@
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "brand": "Bébe",
+  "type": "PIANO",
+  "price": 1000
+}
+
+###
+PUT http://localhost:8080/api/instruments/1
+Content-Type: application/json
+Accept: application/json
+
+{
+"price": 1000
+}
+
+###
+GET http://localhost:8080/api/instruments/1
+Content-Type: application/json
+Accept: application/json
+
+###
+
+DELETE http://localhost:8080/api/instruments
+Accept: application/json
+
+###
