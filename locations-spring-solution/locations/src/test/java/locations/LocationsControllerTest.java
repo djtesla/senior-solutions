@@ -24,10 +24,11 @@ class LocationsControllerTest {
 
     @Test
     void testGetLocations() {
-        when(locationsService.getLocations()).thenReturn(Arrays.asList(new Location(1, "Bécs", 23.5, 12.2),
-                new Location(2, "Budapest", 123.9, 112.5),
-                new Location(3, "Jakarta", 33.7, 142.1)));
-        assertThat(locationsController.getLocations()).contains("Bécs");
+        when(locationsService.getLocations()).thenReturn(Arrays.asList(
+                new LocationDto(1, "Bécs", 23.5, 12.2),
+                new LocationDto(2, "Budapest", 123.9, 112.5),
+                new LocationDto(3, "Jakarta", 33.7, 142.1)));
+        assertThat(locationsController.getLocations()).extracting(LocationDto::getName).contains("Bécs");
     }
 
 

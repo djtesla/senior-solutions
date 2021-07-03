@@ -16,7 +16,7 @@ class LocationsControllerIT {
 
     @Test
     void testGetLocations() {
-        assertThat(locationsController.getLocations()).contains("Bécs");
+        assertThat(locationsController.getLocations()).extracting(LocationDto::getName).contains("Bécs");
     }
 
 }
