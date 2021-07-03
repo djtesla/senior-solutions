@@ -1,0 +1,71 @@
+###
+GET http://localhost:8080/api/instruments
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments/95
+Accept: application/json
+
+
+###
+GET http://localhost:8080/api/instruments?brand=Yamaha
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments?price=120000
+Accept: application/json
+
+###
+GET http://localhost:8080/api/instruments?brand=Yamaha&price=120000
+Accept: application/json
+
+
+###
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+
+{
+  "brand": "Yamaha",
+  "type": "PIANO",
+  "price": 120000
+}
+
+###
+POST http://localhost:8080/api/instruments/upload
+Content-Type: application/json
+
+
+###
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+
+{
+  "brand": "Yamaha",
+  "type": "PIANO",
+  "price": 120000
+}
+
+###
+POST http://localhost:8080/api/instruments
+Content-Type: application/json
+Accept: application/json
+
+{
+  "brand": "",
+  "type": "PIANO",
+  "price": 120000
+}
+
+
+###
+POST http://localhost:8080/api/instruments/1
+Content-Type: application/json
+Accept: application/json
+
+{
+  "price": -1000
+}
+
+###
+DELETE http://localhost:8080/api/instruments
+Accept: application/json

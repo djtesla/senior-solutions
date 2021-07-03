@@ -4,16 +4,28 @@ Accept: applicaiton/json
 
 
 ###
-GET http://localhost:8080/api/employees/11
+GET http://localhost:8080/api/employees/12
 Accept: applicaiton/json
 
+
+
+
+### Validaiton
+POST http://localhost:8080/api/employees
+Content-Type: application/json
+Accept: applicaiton/json
+
+{
+  "name": ""
+}
 
 ###
 POST http://localhost:8080/api/employees
 Content-Type: application/json
+Accept: applicaiton/json
 
 {
-"name": "July Doe"
+  "name": "Jimmy Doe"
 }
 
 
