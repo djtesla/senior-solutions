@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -16,7 +18,7 @@ class LocationsControllerIT {
 
     @Test
     void testGetLocations() {
-        assertThat(locationsController.getLocations()).extracting(LocationDto::getName).contains("Bécs");
+        assertThat(locationsController.getLocations(Optional.empty(), Optional.empty(), Optional.empty())).extracting(LocationDto::getName).contains("Bécs");
     }
 
 }

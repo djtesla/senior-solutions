@@ -4,14 +4,17 @@ package employees;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
 import javax.crypto.spec.PSource;
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -48,7 +51,7 @@ public class EmployeesController {
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public EmployeeDto createEmployee(@RequestBody CreateEmployeeCommand command) {
+    public EmployeeDto createEmployee(@RequestBody @Valid CreateEmployeeCommand command) {
         return employeesService.createEmployee(command);
     }
 
@@ -65,6 +68,8 @@ public class EmployeesController {
 
     }
 
+
+
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Problem> handleNotFound(IllegalArgumentException iae) {
@@ -76,6 +81,25 @@ public class EmployeesController {
                 .build();
         return ResponseEntity
                 .status(HttpStatus.NOT_FOUND)
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(problem);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<Problem> handleValidException(MethodArgumentNotValidException mae) {
+        List<Violation> violations = mae.getBindingResult().getFieldErrors().stream()
+                .map(fieldError -> new Violation(fieldError.getField(), fieldError.getDefaultMessage()))
+                .collect(Collectors.toList());
+        Problem problem = Problem.builder()
+                .withType(URI.create("employees/not-valid"))
+                .withTitle("Validation error")
+                .withStatus(Status.BAD_REQUEST)
+                .withDetail(mae.getMessage())
+                .with("violations", violations)
+                .build();
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(problem);
     }

@@ -56,13 +56,13 @@ public class LocationsService {
 
     public LocationDto updateLocation(long id, UpdateLocationCommand command) {
         Location locationToBeUpdated = findLocationById(id);
-        if (!locationToBeUpdated.getName().equals(command.getName())) {
+        if (command.getName()!= null && !locationToBeUpdated.getName().equals(command.getName())) {
             locationToBeUpdated.setName(command.getName());
         }
-        if (locationToBeUpdated.getLon()!= command.getLon()) {
+        if (command.getLon()!= 0 && locationToBeUpdated.getLon()!= command.getLon()) {
             locationToBeUpdated.setLon(command.getLon());
         }
-        if (locationToBeUpdated.getLat()!= command.getLat()) {
+        if (command.getLat()!= 0 && locationToBeUpdated.getLat()!= command.getLat()) {
             locationToBeUpdated.setLat(command.getLat());
         }
         return modelMapper.map(locationToBeUpdated, LocationDto.class);
@@ -71,6 +71,11 @@ public class LocationsService {
     public void deleteLocation(long id) {
         Location locationToBeDeleted = findLocationById(id);
         locations.remove(locationToBeDeleted);
+    }
+
+    public void deleteAllLocations() {
+        locations = new ArrayList<>();
+        idGenerator = new AtomicLong();
     }
 }
 

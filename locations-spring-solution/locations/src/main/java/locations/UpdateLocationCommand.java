@@ -9,15 +9,35 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class UpdateLocationCommand {
 
-    private long id;
+
+
     @NotBlank
     private String name;
     @Min(-90) @Max(90)
     private double lat;
     @Min(-180) @Max(180)
     private double lon;
+
+    public UpdateLocationCommand(String name) {
+        this.name = name;
+    }
+
+    public UpdateLocationCommand(double lat, double lon) {
+        this.lat = lat;
+        this.lon = lon;
+    }
+
+
+    public UpdateLocationCommand(double lat) {
+        this.lat = lat;
+
+
+    }
+
+
+
 }

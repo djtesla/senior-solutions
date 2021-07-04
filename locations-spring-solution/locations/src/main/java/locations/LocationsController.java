@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.zalando.problem.Problem;
 import org.zalando.problem.Status;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +17,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("/locations")
 public class LocationsController {
 
     private LocationsService locationsService;
@@ -25,7 +27,7 @@ public class LocationsController {
         this.locationsService = locationsService;
     }
 
-    @GetMapping("/locations")
+    @GetMapping
     public List<LocationDto> getLocations(@RequestParam Optional<String> name, @RequestParam Optional<Double> minLat, @RequestParam Optional<Double> mintLon) {
         return locationsService.getLocations(name, minLat, mintLon);
     }
@@ -36,8 +38,10 @@ public class LocationsController {
     }
 
 
+
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
-    public LocationDto createLocation(@RequestBody CreateLocationCommand command) {
+    public LocationDto createLocation(@RequestBody @Valid CreateLocationCommand command) {
         return locationsService.createLocation(command);
     }
 
@@ -52,10 +56,19 @@ public class LocationsController {
         locationsService.deleteLocation(id);
     }
 
+
+    @DeleteMapping()
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteAllLocation(){
+        locationsService.deleteAllLocations();
+
+    }
+
     @ExceptionHandler(LocationNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<Problem> handleLocationNotFound(LocationNotFoundException lnfe){
         Problem problem = Problem.builder()
-                .withType(URI.create("locations/invalid-json request"))
+                .withType(URI.create("locations/notfound"))
                 .withTitle("not found")
                 .withStatus(Status.NOT_FOUND)
                 .withDetail(lnfe.getMessage())
@@ -67,6 +80,7 @@ public class LocationsController {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<Problem> handleNotValid(MethodArgumentNotValidException mae){
 
         List<Violation> violations = mae.getBindingResult().getFieldErrors().stream()
