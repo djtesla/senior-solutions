@@ -8,16 +8,16 @@ Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 * [x] Elnevezések
 * [x] Assert
 * [x] Kivételkezelés és timeout tesztelése
-* [ ] Egymásba ágyazás
-* [ ] Tagek és metaannotációk használata
+* [x] Egymásba ágyazás
+* [x] Tagek és metaannotációk használata
 * [x] Tesztesetek ismétlése
 * [ ] Paraméterezett tesztek
 * [ ] Dinamikus tesztek
-* [ ] Tempdirectory extension
-* [ ] JUnit 4 és 5 használata
+* [x] Tempdirectory extension
+* [x] JUnit 4 és 5 használata
 * [ ] Hamcrest
 * [ ] Saját Hamcrest matcher implementálása
 * [x] AssertJ
 * [ ] AssertJ kiterjeszthetőség
 * [x] Mockito
-* [ ] Teszt lefedettség
+* [x] Teszt lefedettség
