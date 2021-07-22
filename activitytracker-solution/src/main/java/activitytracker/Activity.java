@@ -16,8 +16,10 @@ public class Activity {
     public Activity() {
     }
 
+    @TableGenerator(name = "act_id_gen", pkColumnName = "id_gen", valueColumnName = "id_val")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "act_id_gen")
     private Long id;
 
     @Column(name = "start_time", nullable = false)
