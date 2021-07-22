@@ -24,7 +24,7 @@ public class ActivityTrackerMain {
         Activity another = entityManager.find(Activity.class, id);;
         System.out.println(another);
 
-        Activity activity2 = new Activity(LocalDateTime.of(2021, 07, 23, 11, 10), "Futás a MArgitszigeten", Activity.ActivityType.RUNNING);
+        Activity activity2 = new Activity(LocalDateTime.of(2021, 07, 23, 11, 10), "Futás a Margitszigeten", Activity.ActivityType.RUNNING);
         entityManager.getTransaction().begin();
         entityManager.persist(activity2);
         entityManager.getTransaction().commit();
