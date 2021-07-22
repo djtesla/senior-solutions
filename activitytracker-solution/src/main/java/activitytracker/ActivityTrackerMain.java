@@ -16,8 +16,9 @@ public class ActivityTrackerMain {
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("pu");
         EntityManager entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
-        Activity activity1 = new Activity(LocalDateTime.of(2021, 07, 22, 15, 33), "Túrázás a átrában", Activity.ActivityType.HIKING);
+        Activity activity1 = new Activity(LocalDateTime.of(2021, 07, 22, 15, 33), "Túrázás a Mátrában", Activity.ActivityType.HIKING);
         entityManager.persist(activity1);
+        activity1.setDescription("Túrázás a Bükkben");
         entityManager.getTransaction().commit();
         long id = activity1.getId();
         Activity another = entityManager.find(Activity.class, id);;
