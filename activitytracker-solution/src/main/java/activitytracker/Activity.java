@@ -1,5 +1,7 @@
 package activitytracker;
 
+import com.sun.istack.Nullable;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
@@ -18,12 +20,14 @@ public class Activity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "start_time")
+    @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
 
+    @Column(nullable = false, length = 200)
     private String description;
 
-    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, length = 20)
+    @Enumerated(EnumType.STRING) // már alapba így csináltam
     private ActivityType type;
 
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
