@@ -32,6 +32,12 @@ public class Activity {
     @Enumerated(EnumType.STRING) // már alapba így csináltam
     private ActivityType type;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name ="updated_at")
+    private LocalDateTime updatedAt;
+
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
         this.startTime = startTime;
         this.description = description;
@@ -68,6 +74,22 @@ public class Activity {
 
     public void setType(ActivityType type) {
         this.type = type;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override

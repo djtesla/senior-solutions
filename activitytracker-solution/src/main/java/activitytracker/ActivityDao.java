@@ -17,6 +17,7 @@ public class ActivityDao {
     public void saveActivity(Activity activity) {
         EntityManager entityManager = factory.createEntityManager();
         entityManager.getTransaction().begin();
+        activity.setCreatedAt(LocalDateTime.now());
         entityManager.persist(activity);
         entityManager.getTransaction().commit();
         entityManager.close();
@@ -35,6 +36,17 @@ public class ActivityDao {
         Activity activity = entityManager.find(Activity.class, id);
         entityManager.close();
         return activity;
+    }
+
+    public void updateActivity(long id, String description) {
+        EntityManager entityManager = factory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Activity activity = entityManager.find(Activity.class, id);
+        activity.setDescription(description);
+        activity.setUpdatedAt((LocalDateTime.now()));
+        entityManager.getTransaction().commit();
+        entityManager.close();
+
     }
 
     public void updateActivityById(long id, String description) {

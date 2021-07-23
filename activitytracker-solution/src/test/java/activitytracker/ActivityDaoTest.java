@@ -46,7 +46,6 @@ class ActivityDaoTest {
     }
 
 
-
     @Test
     void testDeleteActivity() {
         Activity activity = new Activity(LocalDateTime.of(2021, 07, 22, 15, 33),
@@ -55,8 +54,16 @@ class ActivityDaoTest {
         activityDao.deleteActivity(activity.getId());
         List<Activity> activities = activityDao.listActivities();
         assertTrue(activities.isEmpty());
+    }
 
-
+    @Test
+    void testUpdateActivity(){
+        Activity activity = new Activity(LocalDateTime.of(2021, 07, 22, 15, 33),
+                "Túrázás a Mátrában", Activity.ActivityType.HIKING);
+        activityDao.saveActivity(activity);
+        activityDao.updateActivity(activity.getId(),"Túrázás a Bükkben");
+        Activity another = activityDao.findActivityById(activity.getId());
+        assertEquals("Túrázás a Bükkben", another.getDescription());
     }
 
 }
