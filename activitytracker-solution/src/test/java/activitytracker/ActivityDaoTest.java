@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -74,7 +75,35 @@ class ActivityDaoTest {
         activityDao.saveActivity(activity);
         Activity another = activityDao.findActivityByIdWithLabels(activity.getId());
         assertEquals(2, another.getLabels().size());
-
     }
+
+
+    @Test
+    void testFindActivityByIdWithTrackPoints1() {
+        Activity activity = new Activity(LocalDateTime.of(2021, 07, 22, 15, 33),
+                "Túrázás a Mátrában", Activity.ActivityType.HIKING, List.of("Jó idő volt", "Kevés kaját vittünk"));
+        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 7, 22), 100, 100));
+        activity.addTrackPoint(new TrackPoint(LocalDate.of(2021, 8, 23), 100, 105));
+        activityDao.saveActivity(activity);
+        long id = activity.getId();
+        Activity another = activityDao.findActivityByIdWithTrackPoints(id);
+        assertEquals(2, another.getTrackPoints().size());
+    }
+
+
+    @Test
+    void testFindActivityByIdWithTrackPoints2() {
+        Activity activity = new Activity(LocalDateTime.of(2021, 07, 22, 15, 33),
+                "Túrázás a Mátrában", Activity.ActivityType.HIKING, List.of("Jó idő volt", "Kevés kaját vittünk"));
+        activityDao.saveActivity(activity);
+        long id = activity.getId();
+        TrackPoint trackPoint1 = new TrackPoint(LocalDate.of(2021, 7, 22), 100, 100);
+        TrackPoint trackPoint2 = new TrackPoint(LocalDate.of(2021, 8, 23), 100, 105);
+        activityDao.addTrackPoint(id, trackPoint1);
+        activityDao.addTrackPoint(id, trackPoint2);
+        Activity another = activityDao.findActivityByIdWithTrackPoints(id);
+        assertEquals(2, another.getTrackPoints().size());
+    }
+
 
 }

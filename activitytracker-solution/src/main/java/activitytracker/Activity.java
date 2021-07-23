@@ -4,6 +4,7 @@ import com.sun.istack.Nullable;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -42,6 +43,11 @@ public class Activity {
     @ElementCollection
     @CollectionTable(joinColumns = @JoinColumn(name = "activity_id"))
     private List<String> labels;
+
+
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, mappedBy = "activity")
+    @OrderBy("time")
+    List<TrackPoint> trackPoints;
 
     public Activity(LocalDateTime startTime, String description, ActivityType type) {
         this.startTime = startTime;
@@ -110,6 +116,22 @@ public class Activity {
 
     public void setLabels(List<String> labels) {
         this.labels = labels;
+    }
+
+    public List<TrackPoint> getTrackPoints() {
+        return trackPoints;
+    }
+
+    public void setTrackPoints(List<TrackPoint> trackPoints) {
+        this.trackPoints = trackPoints;
+    }
+
+    public void addTrackPoint(TrackPoint trackPoint) {
+        if (trackPoints == null) {
+            trackPoints = new ArrayList<>();
+        }
+        trackPoints.add(trackPoint);
+        trackPoint.setActivity(this);
     }
 
     @Override
