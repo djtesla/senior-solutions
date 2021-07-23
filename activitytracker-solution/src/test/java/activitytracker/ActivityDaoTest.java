@@ -66,4 +66,15 @@ class ActivityDaoTest {
         assertEquals("Túrázás a Bükkben", another.getDescription());
     }
 
+
+    @Test
+    void testSaveThenFindActivityByIdWithLabels () {
+        Activity activity = new Activity(LocalDateTime.of(2021, 07, 22, 15, 33),
+                "Túrázás a Mátrában", Activity.ActivityType.HIKING, List.of("Jó idő volt", "Kevés kaját vittünk"));
+        activityDao.saveActivity(activity);
+        Activity another = activityDao.findActivityByIdWithLabels(activity.getId());
+        assertEquals(2, another.getLabels().size());
+
+    }
+
 }
