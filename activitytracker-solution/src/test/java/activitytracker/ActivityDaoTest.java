@@ -105,5 +105,28 @@ class ActivityDaoTest {
         assertEquals(2, another.getTrackPoints().size());
     }
 
+    @Test
+    void findTrackPointCoordinatesByDate () {
+        Activity activity1 = new Activity(LocalDateTime.of(2021, 2, 22, 15, 33),
+                "Túrázás a Mátrában", Activity.ActivityType.HIKING, List.of("Jó idő volt", "Kevés kaját vittünk"));
+        Activity activity2 = new Activity(LocalDateTime.of(2021, 8, 22, 15, 33),
+                "Túrázás a Bükkben", Activity.ActivityType.HIKING, List.of("Rossz idő volt", "Sok kaját vittünk"));
+        activityDao.saveActivity(activity1);
+        activityDao.saveActivity(activity2);
+        long id1 = activity1.getId();
+        long id2 = activity2.getId();
+        TrackPoint trackPoint1 = new TrackPoint(LocalDate.of(2021, 3, 22), 103, 100);
+        TrackPoint trackPoint2 = new TrackPoint(LocalDate.of(2021, 8, 23), 108, 105);
+        TrackPoint trackPoint3 = new TrackPoint(LocalDate.of(2021, 2, 23), 102, 105);
+        TrackPoint trackPoint4 = new TrackPoint(LocalDate.of(2021, 10, 23), 110, 105);
+        activityDao.addTrackPoint(id1, trackPoint1);
+        activityDao.addTrackPoint(id1, trackPoint2);
+        activityDao.addTrackPoint(id2, trackPoint3);
+        activityDao.addTrackPoint(id2, trackPoint4);
+
+        List<CoordinateDto> coordinateDtos = activityDao.findTrackPointCoordinatesByDate(LocalDateTime.of(2021, 3, 22, 15, 33), 0, 10);
+        assertEquals(110, coordinateDtos.get(1).getLat());
+    }
+
 
 }

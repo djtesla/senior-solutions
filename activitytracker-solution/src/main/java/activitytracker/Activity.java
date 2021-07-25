@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "activities")
+@NamedQuery(name ="findCoordinates", query="select new activitytracker.CoordinateDto(t.lat, t.lon) from TrackPoint t where t.activity.startTime > :afterThis order by t.lat")
 public class Activity {
 
     public enum ActivityType {
