@@ -156,7 +156,6 @@ public class EmployeeDao {
         List<EmpBaseDataDto> employeeDtoList =entityManager.createQuery("select new employees.EmpBaseDataDto(e.id, e.name) from Employee e order by e.name").getResultList();
         entityManager.close();
         return  employeeDtoList;
-
     }
 }
 
