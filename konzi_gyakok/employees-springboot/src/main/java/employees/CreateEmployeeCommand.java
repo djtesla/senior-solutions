@@ -1,22 +1,17 @@
 package employees;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity
-public class Employee {
+@NoArgsConstructor
+public class CreateEmployeeCommand {
 
-    private long id;
+    @NotBlank(message = "Name cannot be blank")
     private String name;
-
-    public Employee(String name) {
-        this.name = name;
-    }
-
 
 }

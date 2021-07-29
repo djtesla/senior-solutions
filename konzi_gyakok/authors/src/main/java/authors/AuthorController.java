@@ -20,7 +20,7 @@ public class AuthorController {
         return authorService.getAuthorsWithBooks();
     }
 
-    @PostMapping()
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public AuthorDto createAuthor(@RequestBody CreateAuthorCommand command) {
         return authorService.createAuthor(command);
