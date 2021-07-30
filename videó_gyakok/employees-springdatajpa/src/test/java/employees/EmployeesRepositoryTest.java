@@ -21,4 +21,16 @@ public class EmployeesRepositoryTest {
         assertThat(employees).extracting(Employee::getName).containsExactly("Buldoser Doe");
 
     }
+
+    @Test
+    void testPersistThanFindByName() {
+        Employee employee1 = new Employee("Buldoser Doe");
+        Employee employee2 = new Employee("Chuck Doe");
+        employeesRepository.save(employee1);
+        employeesRepository.save(employee2);
+        Employee employee =  employeesRepository.findEmployeeByName("Chuck Doe");
+        assertThat(employee.getName()).startsWith("Chuck");
+    }
+
+
 }
