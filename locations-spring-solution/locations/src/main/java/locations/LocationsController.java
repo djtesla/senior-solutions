@@ -34,6 +34,7 @@ public class LocationsController {
 
     @GetMapping("/{id}")
     public LocationDto getLocationById(@PathVariable("id") long id) {
+
         return locationsService.getLocationById(id);
     }
 

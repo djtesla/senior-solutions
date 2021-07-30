@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LocationsServiceTest {
 
-    LocationsService locationsService;
+/*    LocationsService locationsService;
 
 
     @BeforeEach
@@ -25,6 +25,6 @@ class LocationsServiceTest {
         assertThat(locationsService.getLocations(Optional.empty(),Optional.empty(), Optional.empty()))
                 .extracting(LocationDto::getName, LocationDto::getId).contains(tuple("Budapest", 2L));
 
-    }
+    }*/
 
 }

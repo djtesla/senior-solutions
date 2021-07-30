@@ -27,7 +27,7 @@ Kérlek jelöld be, hogy melyik gyakorlati feladatokat oldottad meg!
 * [x] Validáció
 * [x] Spring Boot konfiguráció
 * [ ] Spring Boot naplózás
-* [ ] Spring JdbcTemplate
-* [ ] Spring Data JPA
-* [ ] MariaDB
+* [x] Spring JdbcTemplate
+* [x] Spring Data JPA
+* [x] MariaDB
 * [ ] Integrációs tesztelés
